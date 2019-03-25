@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 
-class Login extends Component {
-    loginHandler() {
+class Signin extends Component {
+    signinHandler() {
         axios.post('http://localhost:8080/user/authenticate/credentials', { email: 'rlvk94@gmail.com', password: '1234' })
             .then(response => {
                 console.log(response.data);
@@ -17,10 +17,10 @@ class Login extends Component {
             <div>
                 <input type="email" placeholder="Email" />
                 <input type="password" placeholder="Password" />
-                <button onClick={this.loginHandler}>Login</button>
+                <button onClick={this.signinHandler}>Sign In</button>
             </div>
         );
     }
 }
 
-export default Login;
+export default Signin;
