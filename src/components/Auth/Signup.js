@@ -2,48 +2,50 @@ import React, { Component } from 'react'
 import axios from 'axios'
 
 import Input from './../UI/Input/Input'
+import './Signup.scss'
 
 class Signup extends Component {
+    fields = [
+        {
+            name: 'firstName',
+            elementType: 'input',
+            type: 'text',
+            placeholder: 'First name'
+        },
+        {
+            name: 'lastName',
+            elementType: 'input',
+            type: 'text',
+            placeholder: 'Last name'
+        },
+        {
+            name: 'email',
+            elementType: 'input',
+            type: 'email',
+            placeholder: 'Email'
+        },
+        {
+            name: 'password',
+            elementType: 'input',
+            type: 'password',
+            placeholder: 'Password'
+        },
+        {
+            name: 'confirmPassword',
+            elementType: 'input',
+            type: 'password',
+            placeholder: 'Confirm Password'
+        }
+    ]
+
     constructor(props) {
         super(props);
         this.state = {
-            fields: [
-                {
-                    name: 'firstName',
-                    value: '',
-                    elementType: 'input',
-                    type: 'text',
-                    placeholder: 'First name'
-                },
-                {
-                    name: 'lastName',
-                    value: '',
-                    elementType: 'input',
-                    type: 'text',
-                    placeholder: 'Last name'
-                },
-                {
-                    name: 'email',
-                    value: '',
-                    elementType: 'input',
-                    type: 'email',
-                    placeholder: 'Email'
-                },
-                {
-                    name: 'password',
-                    value: '',
-                    elementType: 'input',
-                    type: 'password',
-                    placeholder: 'Password'
-                },
-                {
-                    name: 'confirmPassword',
-                    value: '',
-                    elementType: 'input',
-                    type: 'password',
-                    placeholder: 'Confirm Password'
-                }
-            ]
+            firstName: '',
+            lastName: '',
+            email: '',
+            password: '',
+            confirmPassword: ''
         }
     }
 
@@ -62,7 +64,7 @@ class Signup extends Component {
             });
     }
 
-    handleInputChange = (event) => {
+    handleInputChange = event => {
         const target = event.target
         const value = target.type === 'checkbox' ? target.checked : target.value
         const name = target.name
@@ -72,23 +74,24 @@ class Signup extends Component {
         })
     }
 
-    render() {
-        const inputs = this.state.fields.map(field => {
+    render = () => {
+        const inputs = this.fields.map(field => {
             return (
                 <Input
                     key={field.name}
                     name={field.name}
                     placeholder={field.placeholder}
-                    value={field.value}
+                    value={this.state[field.name]}
                     type={field.type}
+                    onChange={this.handleInputChange}
                 />
             )
         })
 
         return (
-            <div>
+            <div className="form-container">
                 {inputs}
-                <button onClick={this.signupHandler}>Sign up</button>
+                <button className="ui fluid green button" onClick={this.signupHandler}>Sign up</button>
             </div>
         );
     }
