@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import axios from 'axios'
+import api from '../../apis/api'
 
 import Input from './../UI/Input/Input'
 import './Signup.scss'
@@ -50,14 +50,14 @@ class Signup extends Component {
     }
 
     signupHandler = () => {
-        axios.post('http://localhost:8080/user', {
+        api.post('/user', {
             firstName: this.state.firstName,
             lastName: this.state.lastName,
             email: this.state.email,
             password: this.state.password
         })
             .then(response => {
-                console.log(response.data)
+                console.log(response)
             })
             .catch(err => {
                 console.log(err)

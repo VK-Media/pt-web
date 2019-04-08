@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
-import axios from 'axios';
+import React, { Component } from 'react'
+import api from '../../apis/api'
 
 import Input from './../UI/Input/Input'
 import './Signup.scss'
@@ -26,13 +26,19 @@ class Signin extends Component {
     }
 
     signinHandler = () => {
-        axios.post('http://localhost:8080/user/authenticate/credentials', { email: this.state.email, password: this.state.password })
+        api.post('/user/authenticate/credentials', { email: this.state.email, password: this.state.password })
             .then(response => {
-                console.log(response.data);
+                let token = response.data.token
+
+                if(token){
+                    this.setToken(token)
+                }
+
+                console.log(response)
             })
             .catch(err => {
-                console.log(err);
-            });
+                console.log(err)
+            })
     }
 
     handleInputChange = event => {
@@ -43,6 +49,10 @@ class Signin extends Component {
         this.setState({
             [name]: value
         })
+    }
+
+    setToken = token => {
+        localStorage.setItem("id_token", token);
     }
 
     render() {
