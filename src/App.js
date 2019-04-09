@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
 import decode from 'jwt-decode'
-import api from './apis/api'
+import { connect } from 'react-redux'
 
+import { authenticateUser } from './actions'
 import './App.scss'
-
 import LandingPage from './components/LandingPage'
 
 class App extends Component {
@@ -13,53 +13,17 @@ class App extends Component {
     }
 
     componentDidMount() {
-        console.log(process.env)
-        /*
-        const url = 'https://pt-api.vkmedia.dk'
-
-        axios.get(url)
-        .then(response => {
-            setTimeout(() => {
-            this.setState({ isLoading: false })
-            }, 2000)
-
-            console.log(response)
-        })
-        .catch(err => {
-            console.log(err)
-        })
-        */
-
-        const token = this.getToken()
-
-        if(token){
-            if(!this.isTokenExpired(token)){
-                const axiosConfig = {
-                    headers: {
-                        Authorization: "Bearer " + token
-                    }
-                }
-
-                api.get('/user/authenticate/jwt', axiosConfig)
-                    .then(response => {
-                        console.log(response)
-                    })
-                    .catch(err => {
-                        console.log(err)
-                    })
-            }
-        } else {
-            this.setState({ isLoading: false })
-        }
+        this.props.authenticateUser()
     }
 
     getToken = () => {
-        return localStorage.getItem("id_token");
+        return localStorage.getItem("id_token")
     }
 
     isTokenExpired = token => {
         try {
-            const decoded = decode(token);
+            const decoded = decode(token)
+            console.log(decoded)
             if (decoded.exp < Date.now() / 1000) {
                 return true
             } else return false
@@ -75,4 +39,4 @@ class App extends Component {
     }
 }
 
-export default App
+export default connect(null, { authenticateUser })(App)
