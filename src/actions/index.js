@@ -1,24 +1,2 @@
-import api from '../apis/api'
-import { getToken, isTokenExpired } from '../helpers/authentication'
-
-export const authenticateUser = () => async dispatch => {
-    const token = getToken()
-    let response = {}
-    
-    if(token){
-        if(!isTokenExpired(token)){
-            const axiosConfig = {
-                headers: {
-                    Authorization: "Bearer " + token
-                }
-            }
-            
-            response = await api.get('/user/authenticate/jwt', axiosConfig)
-        }
-    }
-
-    dispatch({
-        'type': 'AUTHENTICATE_USER',
-        'payload': response
-    })
-}
+export { authenticateUser } from './userAction'
+export { toggleLoadscreen } from './loadAction'
