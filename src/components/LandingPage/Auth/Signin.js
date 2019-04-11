@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
-import api from '../../apis/api'
+import api from '../../../apis/api'
 
-import Input from './../UI/Input/Input'
-import './Signup.scss'
+import Input from './../../UI/Input/Input'
+import './Auth.scss'
 
 class Signin extends Component {
     fields = [
@@ -70,9 +70,13 @@ class Signin extends Component {
         })
 
         return (
-            <div className="form-container">
-                {inputs}
-                <button className="ui fluid green button" onClick={this.signinHandler}>Sign in</button>
+            <div>
+                <h1>Sign In</h1>
+                
+                <div className="form-container">
+                    {inputs}
+                    <button className="ui fluid green button" onClick={this.signinHandler}>Sign in</button>
+                </div>
             </div>
         );
     }
