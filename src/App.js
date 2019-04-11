@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 
 import { authenticateUserOrLogin } from './actions'
 import './App.scss'
-import LandingPage from './components/landingpage'
+import Routes from './routes'
 import Loader from './components/landingpage/Loader/Loader'
 
 class App extends Component {
@@ -12,9 +12,7 @@ class App extends Component {
     }
 
     render() {
-        const content = this.props.isLoading ? <Loader /> : <LandingPage />
-
-        return content
+        return this.props.isLoading ? <Loader /> : <Routes />
     }
 }
 
