@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import api from '../../../apis/api'
 
+import LandingPageNavigation from '../../navigation/LandingPageNavigation/LandingPageNavigation'
 import Input from './../../UI/Input/Input'
 import './Auth.scss'
 
@@ -71,6 +72,8 @@ class Signin extends Component {
 
         return (
             <div>
+                <LandingPageNavigation />
+                
                 <h1>Sign In</h1>
                 
                 <div className="form-container">

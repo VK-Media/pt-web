@@ -3,8 +3,8 @@ import { connect } from 'react-redux'
 
 import { authenticateUserOrLogin } from './actions'
 import './App.scss'
-import LandingPage from './components/LandingPage/index'
-import Loader from './components/Loader/Loader'
+import LandingPage from './components/landingpage'
+import Loader from './components/landingpage/Loader/Loader'
 
 class App extends Component {
     componentDidMount() {
