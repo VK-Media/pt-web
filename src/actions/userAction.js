@@ -1,6 +1,8 @@
 import api from '../apis/api'
 import { getToken, isTokenExpired } from '../helpers/authentication'
 
+import { AUTHENTICATE_USER } from './types'
+
 export const authenticateUser = () => async dispatch => {
     const token = getToken()
     let response = { data: {} }
@@ -18,7 +20,7 @@ export const authenticateUser = () => async dispatch => {
     }
 
     dispatch({
-        'type': 'AUTHENTICATE_USER',
+        'type': AUTHENTICATE_USER,
         'payload': response.data
     })
 }
