@@ -5,7 +5,7 @@ import { AUTHENTICATE_USER } from './types'
 
 export const authenticateUser = () => async dispatch => {
     const token = getToken()
-    let response = { data: {} }
+    let response = { data: { user: {} } }
 
     if (token) {
         if (!isTokenExpired(token)) {
@@ -21,6 +21,6 @@ export const authenticateUser = () => async dispatch => {
 
     dispatch({
         'type': AUTHENTICATE_USER,
-        'payload': response.data
+        'payload': response.data.user
     })
 }
