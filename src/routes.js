@@ -16,5 +16,5 @@ export default () => {
                 <Route path="/app" component={Dashboard} />
             </Router>
         </div>
-    );
+    )
 }

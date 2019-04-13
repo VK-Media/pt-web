@@ -31,7 +31,7 @@ class Signin extends Component {
             .then(response => {
                 let token = response.data.token
 
-                if(token){
+                if (token) {
                     this.setToken(token)
                 }
 
@@ -52,10 +52,6 @@ class Signin extends Component {
         })
     }
 
-    setToken = token => {
-        localStorage.setItem("id_token", token);
-    }
-
     render() {
         const inputs = this.fields.map(field => {
             return (
@@ -73,9 +69,9 @@ class Signin extends Component {
         return (
             <div>
                 <LandingPageNavigation />
-                
+
                 <h1>Sign In</h1>
-                
+
                 <div className="form-container">
                     {inputs}
                     <button className="ui fluid green button" onClick={this.signinHandler}>Sign in</button>
