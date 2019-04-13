@@ -1,8 +1,8 @@
-import { authenticateUser } from './index'
+import { authenticateUserFromToken } from './index'
 import { toggleLoadscreen } from './index'
 
 export const authenticateUserOrLogin = () => async (dispatch, getState) => {
-    await dispatch(authenticateUser())
-    
+    await dispatch(authenticateUserFromToken())
+
     dispatch(toggleLoadscreen())
 }

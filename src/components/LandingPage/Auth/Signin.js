@@ -1,67 +1,40 @@
 import React, { Component } from 'react'
-import api from '../../../apis/api'
+import { Field, reduxForm } from 'redux-form'
+import { connect } from 'react-redux'
 
 import LandingPageNavigation from '../../navigation/LandingPageNavigation/LandingPageNavigation'
-import Input from './../../UI/Input/Input'
+import { renderInput } from '../../../helpers/input'
 import './Auth.scss'
+
+import { authenticateUserFromSignin } from '../../../actions'
 
 class Signin extends Component {
     fields = [
         {
             name: 'email',
-            elementType: 'input',
             type: 'email',
             placeholder: 'Email'
         },
         {
             name: 'password',
-            elementType: 'input',
             type: 'password',
             placeholder: 'Password'
         }
     ]
 
-    state = {
-        email: '',
-        password: ''
+    onSubmit = formValues => {
+        this.props.authenticateUserFromSignin(formValues)
     }
 
-    signinHandler = () => {
-        api.post('/user/authenticate/credentials', { email: this.state.email, password: this.state.password })
-            .then(response => {
-                let token = response.data.token
-
-                if (token) {
-                    this.setToken(token)
-                }
-
-                console.log(response)
-            })
-            .catch(err => {
-                console.log(err)
-            })
-    }
-
-    handleInputChange = event => {
-        const target = event.target
-        const value = target.type === 'checkbox' ? target.checked : target.value
-        const name = target.name
-
-        this.setState({
-            [name]: value
-        })
-    }
-
-    render() {
+    render = () => {
         const inputs = this.fields.map(field => {
             return (
-                <Input
+                <Field
+                    component={renderInput}
                     key={field.name}
                     name={field.name}
                     placeholder={field.placeholder}
-                    value={this.state[field.name]}
                     type={field.type}
-                    onChange={this.handleInputChange}
                 />
             )
         })
@@ -71,14 +44,34 @@ class Signin extends Component {
                 <LandingPageNavigation />
 
                 <h1>Sign In</h1>
-
                 <div className="form-container">
-                    {inputs}
-                    <button className="ui fluid green button" onClick={this.signinHandler}>Sign in</button>
+                    <form className="ui form error" onSubmit={this.props.handleSubmit(this.onSubmit)} >
+                        {inputs}
+                        <button className="ui fluid green button" >Sign in</button>
+                    </form>
                 </div>
             </div>
-        );
+        )
     }
 }
 
-export default Signin;
+const validate = formValues => {
+    const errors = {}
+
+    if (!formValues.email) {
+        errors.email = 'An email is required'
+    }
+
+    if (!formValues.password) {
+        errors.password = 'A password is required'
+    }
+
+    return errors
+}
+
+const formWrapped = reduxForm({
+    form: 'signIn',
+    validate
+})(Signin)
+
+export default connect(null, { authenticateUserFromSignin })(formWrapped)

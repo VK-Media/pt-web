@@ -1,11 +1,11 @@
 import decode from 'jwt-decode'
 
 export const getToken = () => {
-    return localStorage.getItem("id_token")
+    return localStorage.getItem('id_token')
 }
 
 export const setToken = token => {
-    localStorage.setItem("id_token", token);
+    localStorage.setItem('id_token', token);
 }
 
 export const isTokenExpired = token => {

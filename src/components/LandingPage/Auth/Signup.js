@@ -1,90 +1,55 @@
 import React, { Component } from 'react'
-import api from '../../../apis/api'
+import { Field, reduxForm } from 'redux-form'
+import { connect } from 'react-redux'
 
 import LandingPageNavigation from '../../navigation/LandingPageNavigation/LandingPageNavigation'
-import Input from './../../UI/Input/Input'
+import { renderInput } from '../../../helpers/input'
 import './Auth.scss'
+
+import { createUserFromSignup } from '../../../actions'
 
 class Signup extends Component {
     fields = [
         {
             name: 'firstName',
-            elementType: 'input',
             type: 'text',
             placeholder: 'First name'
         },
         {
             name: 'lastName',
-            elementType: 'input',
             type: 'text',
             placeholder: 'Last name'
         },
         {
             name: 'email',
-            elementType: 'input',
             type: 'email',
             placeholder: 'Email'
         },
         {
             name: 'password',
-            elementType: 'input',
             type: 'password',
             placeholder: 'Password'
         },
         {
             name: 'confirmPassword',
-            elementType: 'input',
             type: 'password',
             placeholder: 'Confirm Password'
         }
     ]
 
-    constructor(props) {
-        super(props);
-        this.state = {
-            firstName: '',
-            lastName: '',
-            email: '',
-            password: '',
-            confirmPassword: ''
-        }
-    }
-
-    signupHandler = () => {
-        api.post('/user', {
-            firstName: this.state.firstName,
-            lastName: this.state.lastName,
-            email: this.state.email,
-            password: this.state.password
-        })
-            .then(response => {
-                console.log(response)
-            })
-            .catch(err => {
-                console.log(err)
-            });
-    }
-
-    handleInputChange = event => {
-        const target = event.target
-        const value = target.type === 'checkbox' ? target.checked : target.value
-        const name = target.name
-
-        this.setState({
-            [name]: value
-        })
+    onSubmit = formValues => {
+        this.props.createUserFromSignup(formValues)
     }
 
     render = () => {
         const inputs = this.fields.map(field => {
             return (
-                <Input
+                <Field
+                    component={renderInput}
                     key={field.name}
                     name={field.name}
                     placeholder={field.placeholder}
-                    value={this.state[field.name]}
                     type={field.type}
-                    onChange={this.handleInputChange}
                 />
             )
         })
@@ -92,16 +57,52 @@ class Signup extends Component {
         return (
             <div>
                 <LandingPageNavigation />
-                
+
                 <h1>Sign Up</h1>
-                
                 <div className="form-container">
-                    {inputs}
-                    <button className="ui fluid green button" onClick={this.signupHandler}>Sign up</button>
+                    <form className="ui form error" onSubmit={this.props.handleSubmit(this.onSubmit)} >
+                        {inputs}
+                        <button className="ui fluid green button" >Sign Up</button>
+                    </form>
                 </div>
             </div>
         );
     }
 }
 
-export default Signup
+const validate = formValues => {
+    const errors = {}
+
+    if (!formValues.firstName) {
+        errors.firstName = 'Your first name is required'
+    }
+
+    if (!formValues.lastName) {
+        errors.lastName = 'Your last name is required'
+    }
+
+    if (!formValues.email) {
+        errors.email = 'An email is required'
+    }
+
+    if (!formValues.password) {
+        errors.password = 'A password is required'
+    }
+
+    if (!formValues.confirmPassword) {
+        errors.confirmPassword = 'Please confirm your password'
+    }
+
+    if (formValues.confirmPassword && formValues.password !== formValues.confirmPassword) {
+        errors.confirmPassword = 'Passwords do not match'
+    }
+
+    return errors
+}
+
+const formWrapped = reduxForm({
+    form: 'signUp',
+    validate
+})(Signup)
+
+export default connect(null, { createUserFromSignup })(formWrapped)

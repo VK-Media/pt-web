@@ -2,7 +2,7 @@ import React from 'react'
 
 import './Input.scss'
 
-export default ({ name, type, id, value, placeholder, onChange }) => {
+export default ({ name, type, id, value, placeholder, onChange, onFocus, onBlur }) => {
     return (
         <div className="ui fluid input">
             <input
@@ -12,7 +12,9 @@ export default ({ name, type, id, value, placeholder, onChange }) => {
                 id={id}
                 value={value}
                 placeholder={placeholder}
-                onChange={onChange} />
+                onChange={onChange}
+                onFocus={onFocus}
+                onBlur={onBlur} />
         </div>
     )
 }
