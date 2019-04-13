@@ -1,11 +1,24 @@
-import { AUTHENTICATE_USER_FROM_TOKEN, AUTHENTICATE_USER_FROM_LOGIN, CREATE_USER_FROM_SIGNUP } from '../actions/types'
+import {
+    AUTHENTICATE_USER_FROM_TOKEN,
+    AUTHENTICATE_USER_FROM_LOGIN,
+    CREATE_USER_FROM_SIGNUP,
+    LOG_OUT
+} from '../actions/types'
+
+import { removeToken, setToken } from '../helpers/authentication'
 
 export default (state = {}, action) => {
     switch (action.type) {
         case AUTHENTICATE_USER_FROM_TOKEN:
+            return action.payload
         case AUTHENTICATE_USER_FROM_LOGIN:
         case CREATE_USER_FROM_SIGNUP:
-            return action.payload
+            if (action.payload.token) setToken(action.payload.token)
+
+            return action.payload.user
+        case LOG_OUT:
+            removeToken()
+            return {}
         default:
             return state
     }

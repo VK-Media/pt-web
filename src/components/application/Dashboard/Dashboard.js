@@ -5,9 +5,7 @@ import Application from '../Application/Application'
 export default () => {
     return (
         <Application>
-            <div>
-                <h1>Dashboard!</h1>
-            </div>
+            <h1>Dashboard!</h1>
         </Application>
     )
 }

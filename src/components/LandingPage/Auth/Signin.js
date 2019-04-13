@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import { Field, reduxForm } from 'redux-form'
 import { connect } from 'react-redux'
+import { Redirect } from 'react-router-dom'
+import _ from 'lodash'
 
 import LandingPageNavigation from '../../navigation/LandingPageNavigation/LandingPageNavigation'
 import { renderInput } from '../../../helpers/input'
@@ -27,6 +29,10 @@ class Signin extends Component {
     }
 
     render = () => {
+        if (!_.isEmpty(this.props.user)) {
+            return <Redirect to="/app" />
+        }
+
         const inputs = this.fields.map(field => {
             return (
                 <Field
@@ -74,4 +80,10 @@ const formWrapped = reduxForm({
     validate
 })(Signin)
 
-export default connect(null, { authenticateUserFromSignin })(formWrapped)
+const mapStateToProps = state => {
+    return {
+        user: state.user
+    }
+}
+
+export default connect(mapStateToProps, { authenticateUserFromSignin })(formWrapped)

@@ -13,7 +13,7 @@ export default () => {
                 <Route path="/" exact component={LandingPage} />
                 <Route path="/signup" component={Signup} />
                 <Route path="/signin" component={Signin} />
-                <Route path="/app" component={Dashboard} />
+                <Route path="/app" exact component={Dashboard} />
             </Router>
         </div>
     )

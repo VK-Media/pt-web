@@ -1,7 +1,7 @@
 import api from '../apis/api'
-import { getToken, setToken, isTokenExpired } from '../helpers/authentication'
+import { getToken, isTokenExpired } from '../helpers/authentication'
 
-import { AUTHENTICATE_USER_FROM_TOKEN, AUTHENTICATE_USER_FROM_LOGIN, CREATE_USER_FROM_SIGNUP } from './types'
+import { AUTHENTICATE_USER_FROM_TOKEN, AUTHENTICATE_USER_FROM_LOGIN, CREATE_USER_FROM_SIGNUP, LOG_OUT } from './types'
 
 export const authenticateUserFromToken = () => async dispatch => {
     const token = getToken()
@@ -19,34 +19,24 @@ export const authenticateUserFromToken = () => async dispatch => {
         }
     }
 
-    dispatch({
-        'type': AUTHENTICATE_USER_FROM_TOKEN,
-        'payload': response.data.user
-    })
+    dispatch({ 'type': AUTHENTICATE_USER_FROM_TOKEN, 'payload': response.data.user })
 }
 
 export const authenticateUserFromSignin = formValues => async dispatch => {
-    let response = { data: { token: '', user: {} } }
+    let response = initialResponse
+    response = await api.post('/user/authenticate/credentials', formValues)
 
-    response = await api.post('/user/authenticate/credentials', { ...formValues })
-
-    if (response.data.token) setToken(response.data.token)
-
-    dispatch({
-        'type': AUTHENTICATE_USER_FROM_LOGIN,
-        'payload': response.data.user
-    })
+    dispatch({ 'type': AUTHENTICATE_USER_FROM_LOGIN, 'payload': response.data })
 }
 
 export const createUserFromSignup = formValues => async dispatch => {
-    let response = { data: { token: '', user: {} } }
+    let response = initialResponse
 
-    response = await api.post('/user', { ...formValues })
+    response = await api.post('/user', formValues)
 
-    if (response.data.token) setToken(response.data.token)
-
-    dispatch({
-        'type': CREATE_USER_FROM_SIGNUP,
-        'payload': response.data.user
-    })
+    dispatch({ 'type': CREATE_USER_FROM_SIGNUP, 'payload': response.data })
 }
+
+export const logout = () => ({ 'type': LOG_OUT })
+
+const initialResponse = { data: { token: '', user: {} } }

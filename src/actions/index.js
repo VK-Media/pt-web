@@ -1,7 +1,8 @@
 export {
     authenticateUserFromToken,
     authenticateUserFromSignin,
-    createUserFromSignup
+    createUserFromSignup,
+    logout
 } from './userAction'
 
 export { toggleLoadscreen } from './loadAction'
