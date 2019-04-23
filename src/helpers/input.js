@@ -15,8 +15,6 @@ const renderError = ({ error, touched }) => {
 export const renderInput = ({ input, placeholder, type, meta }) => {
     const className = `field ${meta.error && meta.touched ? 'error' : ''}`
 
-    console.log(input)
-
     return (
         <div className={className}>
             <label>{placeholder}</label>

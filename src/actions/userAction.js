@@ -38,11 +38,11 @@ export const createUserFromSignup = formValues => async dispatch => {
 }
 
 export const updateUser = (formValues, userId) => async dispatch => {
-    let response = initialResponse
+    let response = { data: { user: {} } }
 
     response = await api.patch(`/user/${userId}`, formValues)
 
-    dispatch({ 'type': UPDATE_USER, 'payload': response.data })
+    dispatch({ 'type': UPDATE_USER, 'payload': response.data.user })
 }
 
 export const logout = () => ({ 'type': LOG_OUT })

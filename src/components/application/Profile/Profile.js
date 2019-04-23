@@ -12,12 +12,12 @@ class Profile extends Component {
         {
             name: 'firstName',
             type: 'text',
-            placeholder: 'First name'
+            placeholder: 'Fornavn'
         },
         {
             name: 'lastName',
             type: 'text',
-            placeholder: 'Last name'
+            placeholder: 'Efternavn'
         },
         {
             name: 'email',
@@ -27,11 +27,17 @@ class Profile extends Component {
         {
             name: 'description',
             type: 'textarea',
-            placeholder: 'Description'
+            placeholder: 'Beskrivelse'
+        },
+        {
+            name: 'age',
+            type: 'number',
+            placeholder: 'Alder'
         }
     ]
 
     onSubmit = formValues => {
+        console.log(formValues)
         this.props.updateUser(formValues, this.props.initialValues._id)
     }
 
@@ -50,11 +56,11 @@ class Profile extends Component {
 
         return (
             <Application>
-               <h1>Profile</h1>
+               <h1>Profil</h1>
 
                 <form className="ui form error" onSubmit={this.props.handleSubmit(this.onSubmit)} >
                     {inputs}
-                    <button className="ui fluid green button" >Sign Up</button>
+                    <button className="ui fluid green button" >Opdater</button>
                 </form>
             </Application>
         )
@@ -65,7 +71,7 @@ const validate = formValues => {
     const errors = {}
 
     if (!formValues.email) {
-        errors.email = 'An email is required'
+        errors.email = 'En email er påkrævet'
     }
 
     return errors

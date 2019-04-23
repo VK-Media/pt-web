@@ -2,6 +2,7 @@ import {
     AUTHENTICATE_USER_FROM_TOKEN,
     AUTHENTICATE_USER_FROM_LOGIN,
     CREATE_USER_FROM_SIGNUP,
+    UPDATE_USER,
     LOG_OUT
 } from '../actions/types'
 
@@ -16,6 +17,8 @@ export default (state = {}, action) => {
             if (action.payload.token) setToken(action.payload.token)
 
             return action.payload.user
+        case UPDATE_USER:
+            return action.payload
         case LOG_OUT:
             removeToken()
             return {}
