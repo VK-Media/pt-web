@@ -13,16 +13,6 @@ import { createUserFromSignup } from '../../../actions'
 class Signup extends Component {
     fields = [
         {
-            name: 'firstName',
-            type: 'text',
-            placeholder: 'First name'
-        },
-        {
-            name: 'lastName',
-            type: 'text',
-            placeholder: 'Last name'
-        },
-        {
             name: 'email',
             type: 'email',
             placeholder: 'Email'
@@ -78,14 +68,6 @@ class Signup extends Component {
 
 const validate = formValues => {
     const errors = {}
-
-    if (!formValues.firstName) {
-        errors.firstName = 'Your first name is required'
-    }
-
-    if (!formValues.lastName) {
-        errors.lastName = 'Your last name is required'
-    }
 
     if (!formValues.email) {
         errors.email = 'An email is required'

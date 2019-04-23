@@ -2,6 +2,7 @@ export {
     authenticateUserFromToken,
     authenticateUserFromSignin,
     createUserFromSignup,
+    updateUser,
     logout
 } from './userAction'
 

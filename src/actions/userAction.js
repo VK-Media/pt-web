@@ -1,7 +1,7 @@
 import api from '../apis/api'
 import { getToken, isTokenExpired } from '../helpers/authentication'
 
-import { AUTHENTICATE_USER_FROM_TOKEN, AUTHENTICATE_USER_FROM_LOGIN, CREATE_USER_FROM_SIGNUP, LOG_OUT } from './types'
+import { AUTHENTICATE_USER_FROM_TOKEN, AUTHENTICATE_USER_FROM_LOGIN, CREATE_USER_FROM_SIGNUP, UPDATE_USER, LOG_OUT } from './types'
 
 export const authenticateUserFromToken = () => async dispatch => {
     const token = getToken()
@@ -35,6 +35,14 @@ export const createUserFromSignup = formValues => async dispatch => {
     response = await api.post('/user', formValues)
 
     dispatch({ 'type': CREATE_USER_FROM_SIGNUP, 'payload': response.data })
+}
+
+export const updateUser = (formValues, userId) => async dispatch => {
+    let response = initialResponse
+
+    response = await api.patch(`/user/${userId}`, formValues)
+
+    dispatch({ 'type': UPDATE_USER, 'payload': response.data })
 }
 
 export const logout = () => ({ 'type': LOG_OUT })
