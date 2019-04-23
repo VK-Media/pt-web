@@ -20,7 +20,7 @@ class Signin extends Component {
         {
             name: 'password',
             type: 'password',
-            placeholder: 'Password'
+            placeholder: 'Kodeord'
         }
     ]
 
@@ -49,11 +49,11 @@ class Signin extends Component {
             <div>
                 <LandingPageNavigation />
 
-                <h1>Sign In</h1>
+                <h1>Log ind</h1>
                 <div className="form-container">
                     <form className="ui form error" onSubmit={this.props.handleSubmit(this.onSubmit)} >
                         {inputs}
-                        <button className="ui fluid green button" >Sign in</button>
+                        <button className="ui fluid green button" >Log ind</button>
                     </form>
                 </div>
             </div>
@@ -65,11 +65,11 @@ const validate = formValues => {
     const errors = {}
 
     if (!formValues.email) {
-        errors.email = 'An email is required'
+        errors.email = 'En email er påkrævet'
     }
 
     if (!formValues.password) {
-        errors.password = 'A password is required'
+        errors.password = 'Et kodeord er påkrævet'
     }
 
     return errors

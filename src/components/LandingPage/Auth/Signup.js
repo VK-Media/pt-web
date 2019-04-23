@@ -20,12 +20,12 @@ class Signup extends Component {
         {
             name: 'password',
             type: 'password',
-            placeholder: 'Password'
+            placeholder: 'Kodeord'
         },
         {
             name: 'confirmPassword',
             type: 'password',
-            placeholder: 'Confirm Password'
+            placeholder: 'Gentag kodeord'
         }
     ]
 
@@ -54,11 +54,11 @@ class Signup extends Component {
             <div>
                 <LandingPageNavigation />
 
-                <h1>Sign Up</h1>
+                <h1>Opret profil</h1>
                 <div className="form-container">
                     <form className="ui form error" onSubmit={this.props.handleSubmit(this.onSubmit)} >
                         {inputs}
-                        <button className="ui fluid green button" >Sign Up</button>
+                        <button className="ui fluid green button" >Opret profil</button>
                     </form>
                 </div>
             </div>
@@ -70,19 +70,19 @@ const validate = formValues => {
     const errors = {}
 
     if (!formValues.email) {
-        errors.email = 'An email is required'
+        errors.email = 'En email er påkrævet'
     }
 
     if (!formValues.password) {
-        errors.password = 'A password is required'
+        errors.password = 'Et kodeord er påkrævet'
     }
 
     if (!formValues.confirmPassword) {
-        errors.confirmPassword = 'Please confirm your password'
+        errors.confirmPassword = 'Venligst gentag dit kodeord'
     }
 
     if (formValues.confirmPassword && formValues.password !== formValues.confirmPassword) {
-        errors.confirmPassword = 'Passwords do not match'
+        errors.confirmPassword = 'Dine kodeord er ikke ens'
     }
 
     return errors

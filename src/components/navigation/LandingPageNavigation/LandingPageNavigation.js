@@ -10,21 +10,21 @@ class LandingPageNavigation extends Component {
         if(_.isEmpty(this.props.user)){
             navLinks = (
                 <div className="right menu">
-                    <NavLink className="item" activeClassName="active" to="/signup">Sign Up</NavLink>
-                    <NavLink className="item" activeClassName="active" to="/signin">Sign In</NavLink>
+                    <NavLink className="item" activeClassName="active" to="/signup">Opret profil</NavLink>
+                    <NavLink className="item" activeClassName="active" to="/signin">Log ind</NavLink>
                 </div>
             )
         } else {
             navLinks = (
                 <div className="right menu">
-                    <NavLink className="item" activeClassName="active" to="/app">Dashboard</NavLink>
+                    <NavLink className="item" activeClassName="active" to="/app">Kontrolpanel</NavLink>
                 </div>
             )
         }
 
         return (
             <div className="ui secondary pointing menu">
-                <NavLink className="item" activeClassName="active" exact to="/">Home</NavLink>
+                <NavLink className="item" activeClassName="active" exact to="/">Hjem</NavLink>
                 { navLinks }
             </div>
         )

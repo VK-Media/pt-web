@@ -37,7 +37,6 @@ class Profile extends Component {
     ]
 
     onSubmit = formValues => {
-        console.log(formValues)
         this.props.updateUser(formValues, this.props.initialValues._id)
     }
 
