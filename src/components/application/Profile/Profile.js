@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { NavLink } from 'react-router-dom'
 import { Field, reduxForm } from 'redux-form'
 import { connect } from 'react-redux'
 
@@ -56,6 +57,7 @@ class Profile extends Component {
         return (
             <Application>
                <h1>Profil</h1>
+                <NavLink to="/app/preferences"><i className="big icon cog"></i></NavLink>
 
                 <form className="ui form error" onSubmit={this.props.handleSubmit(this.onSubmit)} >
                     {inputs}

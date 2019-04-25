@@ -12,13 +12,13 @@ const renderError = ({ error, touched }) => {
     }
 }
 
-export const renderInput = ({ input, placeholder, type, meta }) => {
+export const renderInput = ({ input, placeholder, type, options, meta }) => {
     const className = `field ${meta.error && meta.touched ? 'error' : ''}`
 
     return (
         <div className={className}>
             <label>{placeholder}</label>
-            <Input {...input} placeholder={placeholder} type={type} />
+            <Input {...input} placeholder={placeholder} type={type} options={options} />
             {renderError(meta)}
         </div>
     )

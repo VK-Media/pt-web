@@ -13,10 +13,6 @@ class ApplicationNavigation extends Component {
         return (
             <div className="ui vertical fluid tabular menu">
                 <NavLink className="item" activeClassName="active" exact to="/app">Kontrolpanel</NavLink>
-                <NavLink className="item" activeClassName="active" to="/app/settings">Præferencer</NavLink>
-                <NavLink className="item" activeClassName="active" to="/app/clients">Klienter</NavLink>
-                <NavLink className="item" activeClassName="active" to="/app/exercises">Øvelser</NavLink>
-                <NavLink className="item" activeClassName="active" to="/app/programs">Programmer</NavLink>
                 <NavLink className="item" activeClassName="active" to="/app/profile">Profil</NavLink>
                 <button className="ui red button" onClick={this.requestLogout}>Log ud</button>
             </div>

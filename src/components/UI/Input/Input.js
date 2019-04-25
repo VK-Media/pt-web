@@ -1,4 +1,5 @@
 import React from 'react'
+import _ from 'lodash'
 
 import './Input.scss'
 
@@ -10,7 +11,7 @@ export default (input) => {
     )
 }
 
-const determineType = ({ name, type, id, value, placeholder, onChange, onFocus, onBlur }) => {
+const determineType = ({ name, type, id, value, placeholder, options, onChange, onFocus, onBlur }) => {
     switch (type) {
         case 'textarea':
             return (
@@ -25,6 +26,29 @@ const determineType = ({ name, type, id, value, placeholder, onChange, onFocus, 
                     onFocus={onFocus}
                     onBlur={onBlur}
                 />
+            )
+
+        case 'select':
+            let renderedOptions = null
+
+            if (!_.isEmpty(options)) {
+                renderedOptions = options.map(option => {
+                    return <option key={option.value} value={option.value}>{option.label}</option>
+                })
+            }
+
+            return (
+                <select 
+                    value={value}
+                    name={name}
+                    id={id}
+                    onChange={onChange}
+                    onFocus={onFocus}
+                    onBlur={onBlur}
+                >
+                    <option value="">{placeholder}</option>
+                    { renderedOptions }
+                </select>
             )
 
         default:

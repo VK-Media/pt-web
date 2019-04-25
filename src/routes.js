@@ -6,6 +6,7 @@ import Signup from './components/landingpage/Auth/Signup'
 import Signin from './components/landingpage/Auth/Signin'
 import Dashboard from './components/application/Dashboard/Dashboard'
 import Profile from './components/application/Profile/Profile'
+import Preferences from './components/application/Preferences/Preferences';
 
 export default () => {
     return (
@@ -16,6 +17,7 @@ export default () => {
                 <Route path="/signin" component={Signin} />
                 <Route path="/app" exact component={Dashboard} />
                 <Route path="/app/profile" component={Profile} />
+                <Route path="/app/preferences" component={Preferences} />
             </Router>
         </div>
     )
