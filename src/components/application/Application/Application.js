@@ -3,7 +3,9 @@ import { connect } from 'react-redux'
 import { Redirect } from 'react-router-dom'
 import _ from 'lodash'
 
-import ApplicationNavigation from '../../navigation/ApplicationNavigation/ApplicationNavigation'
+import './Application.scss'
+
+import Header from './Header/Header'
 
 const Application = props => {
     if (_.isEmpty(props.user)) {
@@ -11,9 +13,9 @@ const Application = props => {
     }
 
     return (
-        <div className="ui grid">
-            <div className="three wide column"><ApplicationNavigation /></div>
-            <div className="thirteen wide column">{props.children}</div>
+        <div>
+            <Header title={props.title} />
+            <div id="content">{props.children}</div>
         </div>
     )
 }

@@ -1,0 +1,10 @@
+@import '../../../../assets/scss/variables';
+
+#header {
+    padding: 10px;
+    background-color: $medium-green;
+
+    h1 {
+        color: $white;
+    }
+}

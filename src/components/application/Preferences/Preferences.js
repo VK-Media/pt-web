@@ -45,11 +45,6 @@ class Preferences extends Component {
             ]
         },
         {
-            name: 'colorScheme',
-            type: 'color',
-            placeholder: 'Tema farve'
-        },
-        {
             name: 'allowNotifications',
             type: 'checkbox',
             placeholder: 'Tillad notifikationer'
@@ -63,7 +58,6 @@ class Preferences extends Component {
     }
 
     render = () => {
-        console.log(this.props.initialValues)
         const inputs = this.fields.map(field => {
             return (
                 <Field
@@ -78,8 +72,7 @@ class Preferences extends Component {
         })
 
         return (
-            <Application>
-                <h1>Indstillinger</h1>
+            <Application title="Indstillinger">
                 <form className="ui form error" onSubmit={this.props.handleSubmit(this.onSubmit)} >
                     {inputs}
                     <button className="ui fluid green button" >Opdater</button>
