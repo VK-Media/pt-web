@@ -1,0 +1,15 @@
+@import '../../../assets/scss/variables';
+
+.burger {
+        span {
+            display: block;
+            width: 30px;
+            height: 3px;
+            border-radius: 3px;
+            background-color: $white;
+
+            &:not(:last-of-type) {
+                margin-bottom: 5px;
+            }
+        }
+    }

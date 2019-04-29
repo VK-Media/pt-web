@@ -55,7 +55,7 @@ class Profile extends Component {
         })
 
         return (
-            <Application title="Profil">
+            <Application title="Profil" showSettings={ true }>
                 <NavLink to="/app/preferences"><i className="big icon cog"></i></NavLink>
 
                 <form className="ui form error" onSubmit={this.props.handleSubmit(this.onSubmit)} >

@@ -3,8 +3,16 @@
 #header {
     padding: 10px;
     background-color: $medium-green;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 
     h1 {
         color: $white;
+    }
+
+    .left,
+    .right {
+        width: 30px;
     }
 }

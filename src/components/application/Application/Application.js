@@ -14,7 +14,7 @@ const Application = props => {
 
     return (
         <div>
-            <Header title={props.title} />
+            <Header title={props.title} showSettings={ props.showSettings } />
             <div id="content">{props.children}</div>
         </div>
     )
