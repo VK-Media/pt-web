@@ -4,20 +4,38 @@ import { connect } from 'react-redux'
 
 import { logout } from '../../../actions'
 
+import './ApplicationNavigation.scss'
+
 class ApplicationNavigation extends Component {
     requestLogout = () => {
         this.props.logout()
     }
 
+    renderMenu = () => {
+        let menu = null
+
+        if(this.props.showApplicationMenu) {
+            menu = (
+                <div id="app-menu">
+                    <NavLink activeClassName="active" exact to="/app">Kontrolpanel</NavLink>
+                    <NavLink activeClassName="active" to="/app/profile">Profil</NavLink>
+                    <p id="logout" onClick={this.requestLogout}>Log ud</p>
+                </div>
+            )
+        }
+
+        return menu
+    }
+
     render() {
-        return (
-            <div id="app-menu">
-                <NavLink activeClassName="active" exact to="/app">Kontrolpanel</NavLink>
-                <NavLink activeClassName="active" to="/app/profile">Profil</NavLink>
-                <button onClick={this.requestLogout}>Log ud</button>
-            </div>
-        )
+        return this.renderMenu()
     }
 }
 
-export default connect(null, { logout })(ApplicationNavigation)
+const mapStateToProps = state => {
+    return {
+        showApplicationMenu: state.showApplicationMenu
+    }
+}
+
+export default connect(mapStateToProps, { logout })(ApplicationNavigation)

@@ -6,6 +6,7 @@ import _ from 'lodash'
 import './Application.scss'
 
 import Header from './Header/Header'
+import ApplicationNavigation from '../../navigation/ApplicationNavigation/ApplicationNavigation'
 
 const Application = props => {
     if (_.isEmpty(props.user)) {
@@ -15,6 +16,7 @@ const Application = props => {
     return (
         <div>
             <Header title={props.title} showSettings={ props.showSettings } />
+            <ApplicationNavigation />
             <div id="content">{props.children}</div>
         </div>
     )

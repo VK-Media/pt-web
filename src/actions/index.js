@@ -7,5 +7,5 @@ export {
 } from './userAction'
 
 export { toggleLoadscreen } from './loadAction'
-
 export { authenticateUserOrLogin } from './initAction'
+export { toggleApplicationMenu } from './applicationMenuAction'
